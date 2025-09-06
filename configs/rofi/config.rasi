@@ -1,0 +1,27 @@
+//@theme "/usr/share/rofi/themes/DarkBlue.rasi"
+
+//@theme "/usr/share/rofi/themes/fancy.rasi"
+
+//@theme "/usr/share/rofi/themes/fullscreen-preview.rasi"
+
+//@theme "/usr/share/rofi/themes/rounded-purple-dark.rasi"
+
+//@theme "/usr/share/rofi/themes/rounded-orange-dark.rasi"
+
+//@theme "/usr/share/rofi/themes/rounded-pink-dark.rasi"
+
+//@theme "/usr/share/rofi/themes/rounded-purple-dark.rasi"
+
+//@theme "/usr/share/rofi/themes/fullscreen-preview.rasi"
+
+//@theme "/usr/share/rofi/themes/rounded-purple-dark.rasi"
+
+//@theme "/home/ali/.local/share/rofi/themes/rounded-purple-dark.rasi"
+
+@theme "/home/ali/.cache/wal/colors-rofi-dark.rasi"
+//@theme "/home/ali/.local/share/rofi/themes/rounded-pink-dark.rasi"
+
+
+configuration {
+    icon-theme: "Papirus-Paleorange";
+}
