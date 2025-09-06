@@ -1,2 +1,1 @@
 # My sway setup/configuration
-
