@@ -23,5 +23,5 @@
 
 
 configuration {
-    icon-theme: "Papirus-Paleorange";
+    icon-theme: "candy-icons";
 }

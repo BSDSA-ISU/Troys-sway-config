@@ -52,12 +52,11 @@
   "widgets": [
     "inhibitors",
     "title",
-    "mpris",
     "dnd",
+    "mpris",
+    "volume",
     "notifications",
-    "label",
-    "menubar",
-    "volume"
+    "label"
   ],
   "widget-config": {
     "inhibitors": {
@@ -66,24 +65,24 @@
       "clear-all-button": true
     },
     "title": {
-      "text": "Hoshinotifications",
+      "text": "Toshinotifications",
       "clear-all-button": true,
       "button-text": "Clear All"
     },
     "dnd": {
-      "text": "Do Not Disturb Mee"
+      "text": "Do Not Disturb Me plss"
     },
     "label": {
       "max-lines": 5,
-      "text": "AI Hoshino Hoshino"
+      "text": "Toshino Kyouko"
     },
     "mpris": {
       "image-size": 96,
-      "image-radius": 12,
+      "image-radius": 50,
       "blacklist": ["brave"]
     },
     "volume": {
-      "label": "Hoshivolume",
+      "label": "toshivolume",
       "show-per-app": true,
       "animation-type": "slide_up",
       "show-per-app-label": true

@@ -3,10 +3,31 @@
 exec XDG_CURRENT_DESKTOP=sway systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+### pick individual screen via screenshares
+# swaymsg create_output
+
+output HEADLESS-1 resolution 1280x800 position 0,1080
+output HEADLESS-1 bg "#220900" solid_color
+workspace 0 output HEADLESS-1
+bindsym Mod4+0 workspace number 0
+bindsym Mod4+Shift+0 move container to workspace number 0
+
+# Allow screentearing uncomment this
+output * allow_tearing yes
+
 #exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # autoruns
+exec waybar -c ~/.config/waybar/config-sway.jsonc &
+
+exec ~/.config/sway/autorun.sh &
+
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
 exec swaync &
+
+exec ~/.config/sway/countdown.sh
+
 exec_always --no-startup-id xhost +SI:localuser:root
 
 # Default config for sway
@@ -55,17 +76,17 @@ set $menu rofi -show drun -show-icons
 set $alttab rofi -show window -show-icons
 #-config ~/.cache/wal/colors-rofi-dark.rasi
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-#output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
 # Example configuration:
 output LVDS-1 mode 1280x800@60Hz
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+
+
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+### Theming and looks
+
+# Window border
+default_border pixel 2
 
 #femboy color
 include ~/.cache/wal/colors-sway
@@ -73,24 +94,15 @@ include ~/.cache/wal/colors-sway
 client.focused $color1 $color2 $color3 $color4 $color5
 
 ### Idle configuration
-#
-# Example configuration:
-#
  exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000' \
+          timeout 300 'swaylock -f -c 000000  --ignore-empty-password --daemonize --indicator-caps-lock --indicator --clock --timestr "󰥔 %Hh %Mm %Ss" --datestr "󰃭 %b-%d-%Y" --show-failed-attempts --indicator-idle-visible' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           before-sleep 'swaylock -f ' 
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
-#
-# Example configuration:
-#
-#"SynPS/2 Synaptics TouchPad" 
-#input "2:7:SynPS/2_Synaptics_TouchPad" {
-input * {
+
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+#input * {
     tap enabled                      # Enable tapping
 #    natural_scroll enabled           # Enable natural scrollin
     scroll_method two_finger         # Use two-finger scrolling
@@ -98,40 +110,24 @@ input * {
     pointer_accel 1                # Adjust pointer acceleration (change the value as needed)
 }
 
-input "type:mouse" {
-    accel_profile "flat"
-    scroll_factor 0.7
-    drag_lock disable
-    natural_scroll disabled
-    scroll_method "two_finger"
-}
-
-
-
-#here is the switches
-exec waybar -c ~/.config/waybar/config-sway.jsonc &
-default_border pixel 2
-exec ~/.config/sway/autorun.sh &
-#exec notify-send "Xwayland sucessfull" &
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
 #wayland support cause why not?
-xwayland enable
+#xwayland disable
 
+## Uncomment to enable floating window as default when opening
 #for_window [app_id=".*"] floating enable
 
 ### Key bindings
 # Basics:
-
     # volume up/down (pulsemixer) and other toggles
     bindsym $mod+Home exec $volup
     bindsym $mod+End exec $voldown
     bindsym $mod+Insert exec brightnessctl s +1%
     bindsym $mod+Delete exec brightnessctl s 1%-
+#
 #    bindsym $mod+Shift+w exec rfkill toggle 1 && notify-send "Wifi toggle"
 #    bindsym $mod+Shift+b exec rfkill toggle 0 && notify-send "bluetooth toggle"
 
-    # music player
+    # music player keybinds
     bindsym $mod+c exec $plps
     bindsym $mod+b exec $next
     bindsym $mod+z exec $previous
@@ -156,6 +152,7 @@ xwayland enable
     bindsym $mod+Ctrl+E exec $emoji
     bindsym $mod+Tab exec $alttab
 
+    # Start screenshot
     bindsym $mod+Print exec ~/.config/sway/screenshot.sh
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -171,9 +168,9 @@ xwayland enable
     # notification panel
     bindsym $mod+Ctrl+p $Notifi
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Ctrl+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
+    # uncomment to enable the default Exit sway (logs you out of your Wayland session)
+#    bindsym $mod+Ctrl+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
 # Moving around:
 #
     # Move your focus around
@@ -220,7 +217,7 @@ xwayland enable
     bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+#    bindsym $mod+0 workspace number 10
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -231,7 +228,7 @@ xwayland enable
     bindsym $mod+Shift+7 move container to workspace number 7
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+#    bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -307,9 +304,9 @@ gaps outer 7
 
 #theme cursor
 seat * {
-    xcursor_theme Bibata-Modern-Amber 30
+#     xcursor_theme Bibata-Modern-Amber 30
 #    xcursor_theme Moona-Hoshinova 9999999
-#    xcursor_theme Bibata-Pink-Ice 999999999
+   xcursor_theme kasane-teto 40
 }
 #
 # Status Bar:

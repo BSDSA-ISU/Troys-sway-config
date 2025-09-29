@@ -7,7 +7,7 @@
 	"passthrough": false,
 	"gtk-layer-shell": true,
 	"height": 10,
-	"modules-left": ["custom/power", "wlr/taskbar", "sway/window", "sway/mode"],
+	"modules-left": ["custom/power", "custom/update", "wlr/taskbar", "sway/window", "sway/mode"],
 	"modules-center": ["sway/workspaces", "sway/scratchpad"],
 	"modules-right": [
 		"tray",
@@ -39,8 +39,9 @@
            },
 	"custom/update": {
   		"exec": "~/.config/waybar/FetchUpdates.sh",
+		"on-click": "/bin/foot --app-id=cacasaver $HOME/.config/waybar/updater.sh",
   		"interval": 222,
-  		"format": "Updates: {}"
+  		"format": "• {}"
 	},
 	"sway/workspaces": {
 		"all-outputs": true,
@@ -49,7 +50,7 @@
 			"1": "h"
 		},
 		"persistent-workspaces": {
-        	"1": 1,
+        	"1": "a",
 	    	"2": 2,
 	    	"3": 3,
 	    	"4": 4,

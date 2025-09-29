@@ -13,6 +13,12 @@
 @define-color text-color @color1;
 @define-color text-color-disabled rgb(150, 150, 150);
 @define-color bg-selected rgb(0, 128, 255);
+
+* {
+  transition: 200ms;
+  color: @color3;
+}
+
 .notification-row {
   outline: none;
   opacity: 1;
@@ -35,8 +41,7 @@
   padding: 0;
   border-radius: 100%;
   margin-top: 5px;
-  margin-right: 5px;
-  box-shadow: none;
+  margin-ri@color4  box-shadow: none;
   border: none;
   min-width: 24px;
   min-height: 24px;
@@ -345,7 +350,7 @@
 }
 
 .widget-dnd > switch:checked {
-  background: @bg-selected;
+  background: @color8;
 }
 
 .widget-dnd > switch slider {
@@ -469,15 +474,26 @@
   border-radius: 12px;
 }
 
+
 .widget-volume > box > button {
   background-color: @noti-bg;
-
+  color: @color3;
   background: transparent; 
   border: none;
 }
 
+.widget-volume trough highlight {
+  color: @color3;
+}
+
+slider {
+  background-color: @color6;
+  color: @color6; 
+}
+
+
 .per-app-volume {
-  color: aquamarine;
+  color: @color4;
   background-color: @noti-bg;
   padding: 4px 8px 8px 8px;
   margin: 0px 8px 8px 8px;
