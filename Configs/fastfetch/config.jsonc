@@ -141,6 +141,7 @@
         {
             "type": "media",
             "key": "│ └󰝚",
+	    "format": "{title} - {artist} ({status}) ",
             "keyColor": "cyan"
         },
         {

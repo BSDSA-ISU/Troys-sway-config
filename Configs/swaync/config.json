@@ -65,7 +65,7 @@
       "clear-all-button": true
     },
     "title": {
-      "text": "Hoshinotifications",
+      "text": "Notifikoishi",
       "clear-all-button": true,
       "button-text": "Clear All"
     },
@@ -74,15 +74,15 @@
     },
     "label": {
       "max-lines": 5,
-      "text": "Hoshino Ai"
+      "text": "koishi"
     },
     "mpris": {
       "image-size": 96,
       "image-radius": 50,
-      "blacklist": ["brave", "brave.instance78779", "plasma-browser-integration"]
+      "blacklist": []
     },
     "volume": {
-      "label": "Hoshivolume",
+      "label": "Koishivolume",
       "show-per-app": true,
       "animation-type": "slide_up",
       "show-per-app-label": true

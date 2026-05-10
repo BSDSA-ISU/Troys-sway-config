@@ -6,6 +6,12 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 ### pick individual screen via screenshares
 # swaymsg create_output
 
+
+for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The Key"] {
+	floating enable,
+	sticky enable
+}
+
 #output HEADLESS-1 resolution 1280x800 position 0, 1080
 #output HEADLESS-1 bg "#220900" solid_color
 #workspace 0 output HEADLESS-1
@@ -18,13 +24,15 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 #exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # autoruns
-exec waybar -c ~/.config/waybar/config-sway.jsonc &
-
-exec ~/.config/sway/autorun.sh &
+exec waybar
+#exec_always  nm-applet
+exec ~/.config/sway/autorun.sh
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 exec swaync &
+
+exec ~/.config/sway/welcome.sh
 
 exec ~/.config/sway/countdown.sh
 
@@ -104,19 +112,23 @@ client.focused $color1 $color2 $color3 $color4 $color5
 input "2:7:SynPS/2_Synaptics_TouchPad" {
 #input * {
     tap enabled                      # Enable tapping
-#    natural_scroll enabled           # Enable natural scrollin
+    natural_scroll enabled           # Enable natural scrollin
     scroll_method two_finger         # Use two-finger scrolling
-#    scroll_factor 0.6                  # Adjust scroll sensitivity (change the value as needed)
+    scroll_factor 0.6                  # Adjust scroll sensitivity (change the value as needed)
     pointer_accel 1                # Adjust pointer acceleration (change the value as needed)
 }
 
 #wayland support cause why not?
+
 # xwayland disable
 
 ## Uncomment to enable floating window as default when opening
 #for_window [app_id=".*"] floating enable
 
 ### Key bindings
+
+
+
 # Basics:
     # volume up/down (pulsemixer) and other toggles
     bindsym $mod+Home exec $volup
@@ -152,8 +164,13 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     bindsym $mod+Ctrl+E exec $emoji
     bindsym $mod+Tab exec $alttab
 
+    # File manager
+    bindsym $mod+Ctrl+f exec thunar
+
     # Start screenshot
-    bindsym $mod+Print exec flameshot gui
+    bindsym $mod+Print exec ~/.config/sway/screenshot2.sh
+    # keyboard
+     
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

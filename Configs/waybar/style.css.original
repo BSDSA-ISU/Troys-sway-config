@@ -1,0 +1,112 @@
+@import "colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font, monospace";
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 0;
+}
+
+window#waybar {
+    border-radius: 10px;
+    background: @background;
+    color: #cdd6f4;
+}
+
+tooltip {
+    background: #010409;
+    border-radius: 10px;
+}
+
+#workspaces button {
+    padding: 5px;
+    color: @color1;
+    margin-right: 5px;
+}
+
+#workspaces button.active {
+    color: @color2;
+}
+
+#workspaces button.focused {
+    color: @color3;
+    background: @background;
+}
+
+#workspaces button.urgent {
+    color: @color4;
+    background: #010409;
+}
+
+#workspaces button:hover {
+    background: @background;
+    color: @color5;
+}
+
+#cpu,
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#bluetooth,
+#temperature,
+#workspaces,
+#tray,
+#backlight {
+    padding: 0px 14px;
+}
+
+#cpu {
+    color: @color13;
+}
+
+#temperature {
+    color : @color13;
+}
+
+#temperature.critical {
+    color: @color15;
+}
+
+#tray {
+    margin-right: 10px;
+}
+
+#workspaces {
+    margin-left: 10px;
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+#window {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+#clock {
+    color: @color6;
+    margin-right: 14px;
+}
+
+#network {
+    color: @color13;
+}
+
+#bluetooth {
+    color: @color8;
+} 
+
+#pulseaudio {
+    color: @color9;
+}
+
+#pulseaudio.microphone {
+    color: @color10;
+}
+
+#battery {
+    color: @color11;
+}

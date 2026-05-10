@@ -1,0 +1,192 @@
+{
+	"layer": "top",
+	"position": "top",
+	"margin": "0",
+	"mod": "bar",
+	"exclusive": true,
+	"passthrough": false,
+	"gtk-layer-shell": true,
+	"height": 10,
+	"modules-left": ["custom/power", "custom/update", "wlr/taskbar", "wlr/window"],
+	"modules-center": ["wlr/workspaces"],
+	"modules-right": [
+		//"backlight",
+//		"temperature",
+        "tray", 
+		"custom/core0",
+		"custom/core2",
+		"battery",
+        "network",
+		//"backlight",
+		"wireplumber",
+        "cpu",
+		// "pulseaudio#microphone",
+		"clock"
+	],
+	"include": [],
+	"sway/window": {
+		"format": "{}"
+	},
+	"wlr/taskbar" :{
+		"format": "{icon}",
+		"on-click": "activate",
+		"icon-size": 12,
+		"rewrite": {"Firefox Web Browser": "Firefox"}
+	},
+	"custom/power": {
+            "format" : " ⏻ ",
+            "on-click": "wlogout"
+           },
+	"custom/update": {
+  		"exec": "~/.config/waybar/FetchUpdates.sh",
+  		"interval": 222,
+  		"format": " Updates: {} "
+	},
+	"wlr/workspaces": {
+		"all-outputs": true,
+		"on-click": "activate",
+		"format-icons": {
+			"1": "h"
+		},
+		"persistent-workspaces": {
+        	"1": 1,
+	    	"2": 2,
+	    	"3": 3,
+	    	"4": 4,
+	    	"5": 5,
+	    	"6": 6
+		}
+	},
+	"tray": {
+		"icon-size": 12,
+		"spacing": 2
+	},
+	"clock": {
+		"format": "{:%H:%M}",
+		"tooltip-format": "{calendar}",
+		"timezone": "localtime",
+		"calendar": {
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+				"today": "<span color='#ffcc66'><b><u>{}</u></b></span>"
+			}
+		}
+	},
+	"backlight": {
+		"device": "intel_backlight",
+		"format": "{icon} {percent}%",
+		"format-icons": ["󰃞", "󰃟", "󰃠"],
+		"on-scroll-up": "brightnessctl set 10%+",
+		"on-scroll-down": "brightnessctl set 10%-",
+		"min-length": 6
+	},
+    "cpu": {
+        "format": "{usage}%",
+		"on-click": "~/.config/waybar/cpufreq.sh"
+//    "interval": "1"
+    },
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 20
+		},
+		"format": "{icon} {capacity}%",
+		"format-charging": " {capacity}%",
+		"format-plugged": " {capacity}%",
+		"format-alt": "{time} {icon}",
+		"format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+	},
+	"wireplumber": {
+		"format": "{icon} {volume}%",
+		"tooltip": false,
+		"format-muted": " Muted",
+		"on-click": "alacritty -e 'alsamixer'",
+		"on-click-right": "alacritty -e 'alsamixer'",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", "", ""]
+		}
+	},
+	"cava": {
+//        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+        "framerate": 30,
+        "autosens": 1,
+        "sensitivity": 1,
+        "bars": 10,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pulse",
+        "source": "auto",
+        "stereo": true,
+        "reverse": false,
+        "bar_delimiter": ".",
+        "monstercat": false,
+        "waves": false,
+        "noise_reduction": 0.77,
+        "input_delay": 2,
+        "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+        "actions": {
+                   "on-click-right": "mode"
+                   }
+    },
+	"pulseaudio#microphone": {
+		"format": "{format_source}",
+		"format-source": " {volume}%",
+		"format-source-muted": " Muted",
+		"on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
+		"on-click-right": "pavucontrol",
+		"on-scroll-up": "playerctl volume 0.05+",
+		"on-scroll-down": "playerctl volume 0.05-",
+		"scroll-step": 5
+	},
+	"temperature": {
+		"thermal-zone": 0,
+		"format": "{temperatureC}°C",
+		"critical-threshold": 90,
+		"format-critical": "Dangerous: {temperatureC}°C "
+	},
+	"custom/core0": {
+  		"exec": "sensors | grep 'Core 0' | awk '{print $3}' | tr -d '+'",
+  		"interval": 10,
+  		"format": " {} "
+	},
+	"custom/core2": {
+  		"exec": "sensors | grep 'Core 2' | awk '{print $3}' | tr -d '+'",
+  		"interval": 10,
+  		"format": " {} "
+	},
+	"network": {
+        "interface": "wlan0",
+		"format-wifi": " {signalStrength}%",
+		"format-ethernet": "{ipaddr}/{cidr}",
+		"tooltip-format": "{essid} - {ifname} via {gwaddr}", 
+		"format-linked": "{ifname} (No IP)",
+		"format-disconnected": "Disconnected ⚠",
+		"format-alt": "{ifname}:{essid} {ipaddr}/{cidr}",
+        "interval": 3
+	},
+	"bluetooth": {
+		"format": " {status}",
+		"format-disabled": " off",
+		"format-connected": " {num_connections}",
+		"tooltip-format": "{device_alias}",
+		"tooltip-format-connected": " {device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}",
+		"on-click": "bluetooth toggle"
+	},
+	"sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", "<U+F2D2>"],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    }
+}
+

@@ -30,8 +30,6 @@ main() {
 #	    wal -i "$chosen" -n
 
 		# kill aka reload the waybar
-	    pkill waybar
-	    waybar -c ~/.config/waybar/config-sway.jsonc &
 		sleep 3s
 
 		# sets the wallpaper
@@ -41,6 +39,8 @@ main() {
 	    cp "$chosen" "$wallpaper"
 		rm "$wallpaperblurred"
 #		magick "$chosen" -blur 0x20 "$wallpaperblurred"
+		pkill waybar
+		waybar &
 fi
 }
 
