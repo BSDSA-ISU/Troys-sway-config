@@ -3,7 +3,7 @@
 * {
     font-family: "FiraCode Nerd Font, monospace"; 
 /*    font-weight: bold; */
-    font-size: 12px; 
+    font-size: 10px; 
     min-height: 0;
 }
 
@@ -24,7 +24,7 @@ window#waybar {
 
 
 window#waybar.empty button.active {
-    background-color: blue;
+    background-color: @color5;
 }
 
 
@@ -57,7 +57,8 @@ h1 {
 }
 
 #workspaces button.active {
-    background: @color2;
+    background: @color6;
+    color: @color2;
     transition: all 0.3s ease-in-out;
     border-radius: 25px;
     padding-left: 7px;
@@ -68,7 +69,7 @@ h1 {
 }
 
 #workspaces button.focused {
-    color: @color1;
+    color: @color5;
     min-width: 15px;
     border-radius: 15px;
     padding-left: 7px;
@@ -78,7 +79,7 @@ h1 {
 }
 
 #workspaces button.urgent {
-    color: @color4;
+    color: @color6;
     background: #010409;
 }
 

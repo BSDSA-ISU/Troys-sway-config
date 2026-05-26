@@ -149,7 +149,9 @@
 		"scroll-step": 5
 	},
 	"temperature": {
-		"thermal-zone": 0,
+//		"thermal-zone": 4,
+		"hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+		"input-filename": "temp4_input",
 		"format": "{temperatureC}°C",
 		"critical-threshold": 90,
 		"format-critical": "Dangerous: {temperatureC}°C ",
