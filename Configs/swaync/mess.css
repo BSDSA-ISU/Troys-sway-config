@@ -1,0 +1,371 @@
+@import "colors.css";
+
+/* =========================================================================
+   COLOR VARIANT MAPS (SwayNC Engine mapping to your specific palette)
+   ========================================================================= */
+@define-color cc-bg            @background;     /* #000000 - True dark pitch background */
+@define-color noti-bg          rgba(20, 18, 17, 0.85); /* Slightly lifted off-black for cards */
+@define-color noti-bg-darker   @color0;         /* #000000 - Sunken inputs */
+@define-color text-color       @foreground;     /* #c7c3c2 - Crisp silver-white text */
+
+/* Accent Tiers */
+@define-color accent-primary   @color3;         /* #c06835 - Warm terracotta orange */
+@define-color accent-secondary @color4;         /* #b97b39 - Sandy ochre / Amber gold */
+@define-color accent-muted     @color7;         /* #9b9391 - Soft ash gray */
+
+/* Interactive Focus States */
+@define-color hover-bg         @color2;         /* #ae4525 - Deep rust red hover */
+@define-color hover-bg-bright  @color11;        /* #f29055 - Vivid orange pop */
+
+/* Priority Color Variants */
+@define-color low-priority     @color8;         /* #865249 - Subdued clay brown */
+@define-color normal-priority  @color6;         /* #bf7853 - Warm earthy copper */
+@define-color critical-priority @color9;        /* #e05638 - Intense magma red blast */
+
+/* =========================================================================
+   THE CORE STYLESHEET
+   ========================================================================= */
+
+:root {
+  --cc-bg: transparen
+}
+
+* {
+  font-family: "JetBrains Mono", "Noto Sans", sans-serif;
+}
+
+/* notification popup  */
+.notification .vertical {
+  background-color: @background!important;
+  background: @background;
+}	
+
+
+
+.body {
+  color: @color4;
+}
+
+
+/* --- Fixed Notification Row Shells --- */
+.notification-row {
+  outline: none;
+}
+
+.widget {
+	opacity: 0.9;
+}
+
+/* Dynamic Urgency Border Variants */
+.notification-row .notification-background .notification.low {
+  border-color: @low-priority;
+}
+
+.notification-row .notification-background .notification.normal {
+  border-color: @normal-priority;
+}
+.notification-row .notification-background .notification.critical {
+  border-color: @critical-priority;
+  box-shadow: 0 0 12px rgba(224, 86, 56, 0.4);
+}
+
+/* --- notiy baloon --- */
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  font-size: 15px;
+  font-weight: 800;
+  color: @accent-secondary; 
+}
+
+.time {
+  font-size: 12px;
+  color: @color4;
+}
+
+.notification:hover {
+  background: @color4 ;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box {
+  font-size: 12px;
+  font-weight: 500;
+  color: @accent-muted;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box {
+  font-size: 14px;
+  font-weight: normal;
+  color: @text-color;
+}
+
+/* --- Window Close Button --- */
+.notification-row .notification-background .close-button {
+  background: rgba(255, 255, 255, 0.05);
+  color: @text-color;
+  border-radius: 99px;
+  margin-top: 6px;
+  margin-right: 6px;
+  border: none;
+  min-width: 26px;
+  min-height: 26px;
+}
+
+
+
+/* =========================================================================
+   CONTROL CENTER LIST HOUSING & SYSTEM UTILITIES
+   ========================================================================= */
+.control-center {
+  background: @cc-bg; 
+  border: 2px solid @normal-priority;
+  color: @text-color;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.control-center scrolledwindow,
+.control-center scrolledwindow viewport,
+.control-center scrolledwindow list,
+.control-center .control-center-list {
+  background: transparent !important;
+  background-color: transparent !important;
+  padding: 8px;
+}
+
+.control-center .control-center-list .notification {
+  margin: 6px 4px;
+
+}
+
+.control-center .control-center-list .notification:hover {
+  border-color: @normal-priority; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+
+
+/* =========================================================================
+   THE FINAL TRIPLE-LOCKDOWN FOR RECTANGLE BACKGROUND BLOCKS (.widget / group)
+   ========================================================================= */
+
+
+/* Style the historical single item inside the notification history tray explicitly */
+.control-center-list .notification {
+  background: @noti-bg-darker !important;
+  background-color: @noti-bg-darker !important;
+  border: 1px solid rgba(191, 120, 83, 0.3) !important;
+}
+
+/* --- Title Widget --- */
+.widget-title {
+  margin: 1px;
+}
+
+.widget-title > label {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: @accent-primary; 
+}
+
+.widget-title > button {
+  font-size: 0.9rem;
+  color: @text-color;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid @normal-priority;
+  border-radius: 8px;
+  padding: 4px 12px;
+}
+
+.widget-title > button:hover {
+  background: @hover-bg;
+}
+
+/* --- Do Not Disturb Widget --- */
+.widget-dnd {
+ padding-right: 10px; 
+}
+
+.widget-dnd > label {
+  font-size: 1.1rem;
+  color: @color12; 
+}
+
+.widget-dnd > switch {
+  border-radius: 16px;
+  background: @noti-bg-darker;
+  border: 1px solid @normal-priority;
+}
+
+.widget-dnd > switch:checked {
+  background: @accent-primary;
+}
+
+.widget-dnd > switch slider {
+  background: @text-color;
+  border-radius: 16px;
+  min-height: 20px;
+  min-width: 20px;
+  margin: 2px;
+}
+
+.widget-dnd > switch:checked slider {
+  background: @noti-bg-darker;
+}
+
+/* --- MPRIS Media Player Widget --- */
+.widget-mpris .widget-mpris-player {
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid @color4;
+}
+
+
+.widget-mpris .widget-mpris-player .widget-mpris-title {
+  color: @hover-bg-bright; 
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.widget-mpris-subtitle {
+  color: @color4;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.widget-mpris .widget-mpris-player button:hover {
+  background: @hover-bg;
+}
+
+/* --- Grid Quick-Buttons --- */
+.widget-buttons-grid {
+  padding: 8px;
+  margin: 8px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(191, 120, 83, 0.15);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: @noti-bg;
+  border: 1px solid @normal-priority;
+  border-radius: 10px;
+  padding: 8px;
+  margin: 4px;
+  color: @text-color;
+}
+
+.mpris-overlay {
+  border: 4px solid @color7;
+  border-radius: 20px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: @hover-bg;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: @accent-primary;
+  color: @noti-bg-darker;
+}
+
+/* --- System Sliders (Volume / Backlight) --- */
+.widget-volume, 
+.widget-backlight {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 14px;
+}
+
+.widget-volume > box,
+.widget-backlight > box > button {
+  color: @accent-primary;
+  background: transparent; 
+  border: none;
+}
+
+scale trough {
+  background-color: @noti-bg-darker;
+
+}
+
+scale trough highlight {
+  background-color: @accent-primary; 
+}
+
+scale slider {
+  background-color: @hover-bg-bright; 
+  border-radius: 99px;
+}
+
+/* --- Per-App Audio Sliders expansion --- */
+.per-app-volume {
+  background-color: @noti-bg-darker;
+  border-radius: 10px;
+}
+
+.per-app-volume label {
+  color: @accent-secondary; 
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.per-app-volume button {
+  color: @accent-primary; 
+  background: transparent;
+  border: none;
+}
+
+.per-app-volume button:hover {
+  color: @hover-bg-bright; 
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mpris switcherooo */
+
+.image-button:active {
+  background-color: @color1;
+}
+
+.image-button:hover {
+  background-color: @color1;
+}
+
+.image-button {
+  color: @color3;
+}
+
+
+/* =========================================================================
+   NOTIFICATION GROUP FIX
+   ========================================================================= */
+
+.notification-group {
+  background: transparent !important; 
+  border: none !important;
+  outline: none;
+  box-shadow: none; 
+}
+
+.not-expanded{
+  background: transparent !important; 
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important; 
+}
+
+.control-center-list {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.collapsed {
+  background: transparent;
+  border: none;
+}
+
+
+
+
+
+
+

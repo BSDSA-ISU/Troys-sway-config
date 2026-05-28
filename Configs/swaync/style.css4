@@ -1,0 +1,409 @@
+@import "colors.css";
+
+/* =========================================================================
+   COLOR VARIANT MAPS (SwayNC Engine mapping to your specific palette)
+   ========================================================================= */
+@define-color cc-bg            @background;     /* #000000 - True dark pitch background */
+@define-color noti-bg          rgba(20, 18, 17, 0.85); /* Slightly lifted off-black for cards */
+@define-color noti-bg-darker   @color0;         /* #000000 - Sunken inputs */
+@define-color text-color       @foreground;     /* #c7c3c2 - Crisp silver-white text */
+
+/* Accent Tiers */
+@define-color accent-primary   @color3;         /* #c06835 - Warm terracotta orange */
+@define-color accent-secondary @color4;         /* #b97b39 - Sandy ochre / Amber gold */
+@define-color accent-muted     @color7;         /* #9b9391 - Soft ash gray */
+
+/* Interactive Focus States */
+@define-color hover-bg         @color2;         /* #ae4525 - Deep rust red hover */
+@define-color hover-bg-bright  @color11;        /* #f29055 - Vivid orange pop */
+
+/* Priority Color Variants */
+@define-color low-priority     @color8;         /* #865249 - Subdued clay brown */
+@define-color normal-priority  @color6;         /* #bf7853 - Warm earthy copper */
+@define-color critical-priority @color9;        /* #e05638 - Intense magma red blast */
+
+/* =========================================================================
+   THE CORE STYLESHEET
+   ========================================================================= */
+* {
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: "JetBrains Mono", "Noto Sans", sans-serif;
+}
+
+/* --- Notifications Shell & Rows --- */
+/* --- Notification Row Shell Fix --- */
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+  font-size: 14px;
+  font-weight: normal;
+  color: @text-color;
+}
+/* Dynamic Urgency Border Variants */
+.notification-row .notification-background .notification.low {
+  border-color: @low-priority;
+}
+.notification-row .notification-background .notification.normal {
+  border-color: @normal-priority;
+}
+
+/* --- Content Typography --- */
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  font-size: 15px;
+  font-weight: 800;
+  color: @accent-secondary; /* Beautiful amber/ochre headings */
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+  font-size: 12px;
+  font-weight: 500;
+  color: @accent-muted;
+  margin-right: 30px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+  font-size: 14px;
+  font-weight: normal;
+  color: @text-color;
+}
+
+/* --- Window Close Button --- */
+.notification-row .notification-background .close-button {
+  background: rgba(255, 255, 255, 0.05);
+  color: @text-color;
+  border-radius: 99px;
+  margin-top: 6px;
+  margin-right: 6px;
+  border: none;
+  min-width: 26px;
+  min-height: 26px;
+}
+
+.notification-row .notification-background .close-button:hover {
+  background: @hover-bg;
+  color: @text-color;
+}
+
+/* --- Bottom Actions Bar --- */
+.notification-row .notification-background .notification .notification-action {
+  border-top: 1px solid rgba(191, 120, 83, 0.15);
+  border-right: 1px solid rgba(191, 120, 83, 0.15);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.notification-row .notification-background .notification .notification-action:hover {
+  background: @text-color;
+  color: @text-color;
+}
+
+.notification-row .notification-background .notification .notification-action:first-child {
+  border-bottom-left-radius: 14px;
+}
+
+.notification-row .notification-background .notification .notification-action:last-child {
+  border-bottom-right-radius: 14px;
+  border-right: none;
+}
+
+/* =========================================================================
+   FLOATING NOTIFICATIONS (The temporary pop-ups)
+   ========================================================================= */
+.floating-notifications {
+  background: transparent;
+  color: @background-color;
+}
+
+
+/* This targets ONLY the pop-ups on your screen, not the control center list */
+.floating-notifications .notification {
+  margin: 8px 14px;
+  
+  /* Deep, crisp drop shadow so it floats legibly over any wallpaper */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8),
+              0 0 10px rgba(191, 120, 83, 0.15);
+              
+  /* Optional: slightly sharper border for popups so they look crisp */
+  border: 1px solid @normal-priority;
+}
+
+/* You can even change the pop-up look based on priority */
+.floating-notifications .notification.critical {
+  border: 2px solid @critical-priority;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9),
+              0 0 20px rgba(224, 86, 56, 0.4); /* Heavy magma glow */
+}
+
+.control-center {
+  background: @cc-bg; /* Pure black (#000000) */
+  border: 2px solid @normal-priority;
+  color: @text-color;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  margin: 10px;
+  padding: 6px;
+}
+
+/* This targets the exact sub-window viewport area inside the control center 
+   where the history is drawn, forcing it to drop the system theme color.
+*/
+.control-center scrolledwindow,
+.control-center scrolledwindow viewport,
+.control-center scrolledwindow list {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* =========================================================================
+   NOTIFICATIONS HISTORY CONTAINER
+   ========================================================================= */
+
+/* 1. The main list wrapper inside the control center */
+
+
+
+.control-center .control-center-list {
+  background: transparent; /* Keeps it clean, showing the panel background */
+  padding: 8px;
+}
+
+/* 2. Style ONLY the notification cards that are sitting in your history */
+.control-center .control-center-list .notification {
+  margin: 6px 4px;
+  background: @noti-bg-darker; /* #000000 - Sunken dark look for history items */
+  border: 1px solid rgba(191, 120, 83, 0.2); /* Muted copper border */
+  
+  /* Subtle, tight shadow so it looks flat and clean inside the tray */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
+}
+
+/* 3. Change how history cards look when you hover over them */
+.control-center .control-center-list .notification:hover {
+  border-color: @normal-priority; /* #bf7853 - Lights up the border slightly */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* 4. The placeholder text when your history is completely empty */
+.control-center .control-center-list-placeholder {
+  color: @accent-muted; /* #9b9391 - Soft ash gray text */
+  opacity: 0.6;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* =========================================================================
+   THE FINAL TRIPLE-LOCKDOWN FOR THE RECTANGLE BACKGROUND
+   ========================================================================= */
+
+/* =========================================================================
+   THE FINAL OBLITERATION OF THE NOTIFICATION GROUP BACKGROUND
+   ========================================================================= */
+
+/* Target the group wrapper element itself and all its immediate layout boxes */
+notification-group,
+.notification-group,
+.notification-group > box,
+.notification-group .notification-row,
+.notification-group .notification-background {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Clear the stack background layout that houses the cards */
+.notification-groupbox,
+.notification-group-box {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Ensure the header text blocks and buttons don't clip white/gray boxes */
+.notification-group .notification-group-headers,
+.notification-group .notification-group-buttons {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: @text-color;
+}
+
+/* When a grouped block is collapsed, it tries to render a stacked shadow look. 
+   We force it to use your dark colors instead of standard gray/white! */
+.notification-group.collapsed .notification-row .notification {
+  background-color: @noti-bg-darker !important;
+  background: @noti-bg-darker !important;
+}
+
+.notification-group.collapsed:hover .notification-row:not(:only-child) .notification {
+  background-color: @hover-bg !important;
+  background: @hover-bg !important;
+}
+
+/* --- Title Widget --- */
+.widget-title {
+  margin: 12px;
+}
+
+.widget-title > label {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: @accent-primary; /* Terracotta orange header */
+}
+
+.widget-title > button {
+  font-size: 0.9rem;
+  color: @text-color;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid @normal-priority;
+  border-radius: 8px;
+  padding: 4px 12px;
+}
+
+.widget-title > button:hover {
+  background: @hover-bg;
+}
+
+/* --- Do Not Disturb Widget (With Customized Colors!) --- */
+.widget-dnd {
+  margin: 12px;
+}
+
+.widget-dnd > label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: @color12; /* Pale gold/ochre for the text */
+}
+
+.widget-dnd > switch {
+  border-radius: 16px;
+  background: @noti-bg-darker;
+  border: 1px solid @normal-priority;
+}
+
+.widget-dnd > switch:checked {
+  background: @accent-primary;
+}
+
+.widget-dnd > switch slider {
+  background: @text-color;
+  border-radius: 16px;
+  min-height: 20px;
+  min-width: 20px;
+  margin: 2px;
+}
+
+.widget-dnd > switch:checked slider {
+  background: @noti-bg-darker;
+}
+
+/* --- MPRIS Media Player Widget --- */
+.widget-mpris .widget-mpris-player {
+  padding: 14px;
+  margin: 8px 12px;
+  background-color: rgba(20, 18, 17, 0.6);
+  border: 1px solid rgba(191, 120, 83, 0.2);
+  border-radius: 14px;
+}
+
+.widget-mpris .widget-mpris-player .widget-mpris-title {
+  color: @hover-bg-bright; /* Pop vivid orange for the active track name */
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.widget-mpris .widget-mpris-player .widget-mpris-subtitle {
+  color: @text-color;
+  opacity: 0.8;
+}
+
+.widget-mpris .widget-mpris-player button:hover {
+  background: @hover-bg;
+}
+
+/* --- Grid Quick-Buttons --- */
+.widget-buttons-grid {
+  padding: 8px;
+  margin: 8px 12px;
+  border-radius: 14px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(191, 120, 83, 0.15);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: @noti-bg;
+  border: 1px solid @normal-priority;
+  border-radius: 10px;
+  padding: 8px;
+  margin: 4px;
+  color: @text-color;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: @hover-bg;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: @accent-primary;
+  color: @noti-bg-darker;
+}
+
+/* --- System Sliders (Volume / Backlight) --- */
+.widget-volume, 
+.widget-backlight {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(191, 120, 83, 0.15);
+  padding: 12px;
+  margin: 8px 12px;
+  border-radius: 14px;
+}
+
+.widget-volume > box > button,
+.widget-backlight > box > button {
+  color: @accent-primary;
+  background: transparent; 
+  border: none;
+}
+
+/* Smooth tracking bars for sliding values */
+scale trough {
+  background-color: @noti-bg-darker;
+  border-radius: 12px;
+  min-height: 10px;
+}
+
+scale trough highlight {
+  background-color: @accent-primary; /* Terracotta fluid fill */
+  border-radius: 12px;
+}
+
+scale slider {
+  background-color: @hover-bg-bright; /* Bright pill element node */
+  border-radius: 99px;
+  min-height: 14px;
+  min-width: 14px;
+  margin: -2px 0px;
+}
+
+/* --- Per-App Audio Sliders expansion --- */
+.per-app-volume {
+  background-color: @noti-bg-darker;
+  border: 1px solid rgba(191, 120, 83, 0.2);
+  padding: 8px;
+  margin: 4px 12px 12px 12px;
+  border-radius: 10px;
+}
+
+/* This forces the specific application titles to use your color palette */
+.per-app-volume label {
+  color: @accent-secondary; /* Beautiful gold/ochre text (#b97b39) */
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Color for the individual audio mute/unmute buttons next to app names */
+.per-app-volume button {
+  color: @accent-primary; /* Terracotta orange icon (#c06835) */
+  background: transparent;
+  border: none;
+}
+
+.per-app-volume button:hover {
+  color: @hover-bg-bright; /* Vivid orange pop on hover (#f29055) */
+  background: rgba(255, 255, 255, 0.05);
+}
