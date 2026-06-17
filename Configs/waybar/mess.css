@@ -106,6 +106,7 @@ h1 {
 #custom-update,
 #custom-core2,
 #custom-power,
+#custom-ai,
 #temperature,
 #workspaces,
 #tray,
@@ -116,6 +117,8 @@ h1 {
     border-top: 2px solid @color2;
     border-bottom: 2px solid @color2;
     border-right: none;
+/*    border: 2px solid @color2;  */
+/*    border-radius: 25px;  */
     padding: 0px 14px; 
     background: @background;
 }
@@ -130,6 +133,19 @@ h1 {
     font-size: 12px;
     padding-right: 0px;
     border-radius: 0 25px 25px 12;
+    color: @color1;
+}
+
+#custom-ai {
+    font-weight: normal;
+    background: @background;
+    border-right: 2px solid @color2;
+    border-top: 2px solid  @color2;
+    border-bottom: 2px solid  @color2;
+    border-left: 2px solid @color2;
+    font-size: 12px;
+    padding-right: 0px;
+    border-radius: 25px 25px 25px 25px;
     color: @color1;
 }
 
@@ -148,19 +164,6 @@ h1 {
     transition: all 0.3s ease-in-out;
     opacity: 1;
     border-radius: 25px;
-}
-
-#custom-ai {
-    font-weight: bold;
-    background: @background;
-    border-right: 2px solid @color2;
-    border-top: 2px solid  @color2;
-    border-bottom: 2px solid  @color2;
-    border-right: 2px;
-    font-size: 10px;
-    padding-right: 3px;
-    border-radius: 25px 25px 25px 25px;
-    color: @color1;
 }
 
 #window {

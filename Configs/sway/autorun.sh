@@ -11,4 +11,4 @@ else
     bash "$wallpaper"
 fi
 
-gnome-calendar &
+

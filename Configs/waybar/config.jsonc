@@ -7,7 +7,7 @@
 	"passthrough": false,
 	"gtk-layer-shell": true,
 	"height": 10,
-	"modules-left": ["custom/power", "wlr/taskbar", "sway/window", "sway/mode"],
+	"modules-left": ["custom/power", "custom/ai", "wlr/taskbar", "sway/window", "sway/mode"],
 	"modules-center": ["sway/workspaces", "sway/scratchpad"],
 	"modules-right": [
 		"tray",
@@ -37,6 +37,10 @@
 	"custom/power": {
             "format" : "ali  ",
             "on-click": "wlogout"
+           },
+	"custom/ai": {
+            "format" : " 💬Ai ",
+            "on-click": "$HOME/.local/share/bin/linux-assistant"
            },
 	"custom/update": {
   		"exec": "~/.config/waybar/FetchUpdates.sh",
@@ -84,9 +88,9 @@
 		"min-length": 6
 	},
     "cpu": {
-        "format": "{usage}%",
-		"on-click": "~/.config/waybar/cpufreq.sh"
-//    "interval": "1"
+        "interval": 5,
+        "format": "{usage}% - {avg_frequency} Ghz",
+	"on-click": "~/.config/waybar/cpufreq.sh"
     },
 	"battery": {
 		"states": {
@@ -150,12 +154,12 @@
 	},
 	"temperature": {
 //		"thermal-zone": 4,
+		"interval": 6,
 		"hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
 		"input-filename": "temp4_input",
 		"format": "{temperatureC}°C",
 		"critical-threshold": 90,
-		"format-critical": "Dangerous: {temperatureC}°C ",
-		"interval": 7
+		"format-critical": "Dangerous: {temperatureC}°C "
 	},
 	"custom/core0": {
   		"exec": "sensors | grep 'Core 0' | awk '{print $3}' | tr -d '+'",

@@ -1,5 +1,12 @@
 # fix screenshare I guess
 
+output "*" max_render_time off
+output "*" allow_tearing yes
+
+# Wallpaper via sway built in
+
+# exec_always --no-startup-id "killall -q waybar; waybar"
+
 exec XDG_CURRENT_DESKTOP=sway systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
@@ -11,6 +18,10 @@ for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The
 	floating enable,
 	sticky enable
 }
+# This will float any window that has "Calculator" anywhere in the title
+for_window [title=".*Assistant*"] floating enable
+
+output LVDS-1 scale_filter linear
 
 #output HEADLESS-1 resolution 1280x800 position 0, 1080
 #output HEADLESS-1 bg "#220900" solid_color
@@ -24,9 +35,8 @@ for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The
 #exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # autoruns
-exec waybar
-#exec_always  nm-applet
-exec ~/.config/sway/autorun.sh
+exec_always  nm-applet
+# exec ~/.config/sway/autorun.sh
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
@@ -85,7 +95,7 @@ set $alttab rofi -show window -show-icons
 #-config ~/.cache/wal/colors-rofi-dark.rasi
 
 # Example configuration:
-output LVDS-1 mode 1280x800@60Hz
+output LVDS-1 mode 1280x800@60.016Hz
 
 
 
@@ -112,6 +122,7 @@ client.focused $color1 $color2 $color3 $color4 $color5
 input "2:7:SynPS/2_Synaptics_TouchPad" {
 #input * {
     tap enabled                      # Enable tapping
+    drag_lock disabled
     natural_scroll enabled           # Enable natural scrollin
     scroll_method two_finger         # Use two-finger scrolling
     scroll_factor 0.6                  # Adjust scroll sensitivity (change the value as needed)
@@ -234,7 +245,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
-#    bindsym $mod+0 workspace number 10
+    bindsym $mod+0 workspace number 10
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -245,7 +256,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     bindsym $mod+Shift+7 move container to workspace number 7
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
-#    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -351,3 +362,4 @@ seat * {
 
 include @sysconfdir@/sway/config.d/*
 
+exec_always --no-startup-id "killall -q waybar; waybar"
